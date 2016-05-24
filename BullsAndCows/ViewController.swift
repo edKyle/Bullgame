@@ -32,7 +32,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     // TODO: 1. decide the data type you want to use to store the answear
-    var answear: String!
+    var answear: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,30 +82,40 @@ class ViewController: UIViewController, UITableViewDataSource {
         // TODO: 3. convert guessString to the data type you want to use and judge the guess
         
         let rightAnswer = generateAnswear()
-        let rightAnswer2 = String(rightAnswer)
+        let rightArray = Array(rightAnswer)
+        let answer = rightArray[0] + rightArray[1] + rightArray[2] + rightArray[3]
+        answear = String(answer)
         
-        let correctAnswer = rightAnswer2.componentsSeparatedByString(" ")
-        let guessArray = guessString!.componentsSeparatedByString(" ")
-        print("correctAnswer\(correctAnswer)")
-        print("guessArray\(guessArray)")
+        
+        
+        
+        print(answear!)
+        
+        let guessInt = Int(guessString!)
+        let guessInt1 = guessInt!/1000
+        let guessInt2 = guessInt!/100 - guessInt1*10
+        let guessInt3 = guessInt!/10 - guessInt2*10 - guessInt1*100
+        let guessInt4 = guessInt!/1 - guessInt3*10 - guessInt2*100 - guessInt1*1000
+        
+        var guessArray = [String(guessInt1),String(guessInt2),String(guessInt3),String(guessInt4)]
         
         var countA = 0
         var countB = 0
         
-        if guessArray[0] == correctAnswer[0]{
+        if guessArray[0] == rightAnswer[0]{
             countA += 1
         }else{
-            for n in correctAnswer{
+            for n in rightAnswer{
                 if guessArray[0] == n{
                     countB += 1
                 }
             }
         }
         
-        if guessArray[1] == correctAnswer[1]{
+        if guessArray[1] == rightAnswer[1]{
             countA += 1
         }else{
-            for n in correctAnswer{
+            for n in rightAnswer{
                 if guessArray[1] == n{
                     countB += 1
                 }
@@ -113,10 +123,10 @@ class ViewController: UIViewController, UITableViewDataSource {
         }
 
         
-        if guessArray[2] == correctAnswer[2]{
+        if guessArray[2] == rightAnswer[2]{
             countA += 1
         }else{
-            for n in correctAnswer{
+            for n in rightAnswer{
                 if guessArray[2] == n{
                     countB += 1
                 }
@@ -124,10 +134,10 @@ class ViewController: UIViewController, UITableViewDataSource {
         }
 
         
-        if guessArray[3] == correctAnswer[3]{
+        if guessArray[3] == rightAnswer[3]{
             countA += 1
         }else{
-            for n in correctAnswer{
+            for n in rightAnswer{
                 if guessArray[3] == n{
                     countB += 1
                 }
@@ -161,7 +171,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     @IBAction func showAnswear(sender: AnyObject) {
         // TODO: 6. convert your answear to string(if it's necessary) and display it
-        answearLabel.text = "\(answear)"
+        answearLabel.text = "\(answear!)"
     }
     
     @IBAction func playAgain(sender: AnyObject) {
