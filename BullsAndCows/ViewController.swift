@@ -47,22 +47,29 @@ class ViewController: UIViewController, UITableViewDataSource {
         guessTextField.text = nil
     }
     
-    func generateAnswear()-> Set<String>{
+    func generateAnswear()-> [String]{
         // TODO: 2. generate your answear here
         // You need to generate 4 random and non-repeating digits.
         // Some hints: http://stackoverflow.com/q/24007129/938380
         
-        var rightAnswer:Set = Set<String>()
+        var base:[String] = ["0","1","2","3","4","5","6","7","8","9"]
+        var rightAnswer:[String] = [String]()
         
-        while rightAnswer.count < 4{
+        while rightAnswer.count < 4 && base.count > 6{
             
             let number = String(arc4random_uniform(10))
-            rightAnswer.insert(number)
+            var n = 0
+            for i in base{
+                if number == i{
+                    let pass = base.removeAtIndex(n)
+                    rightAnswer.append(pass)
+                }
+                n += 1
+            }
         }
-        
+
         return rightAnswer
-        
-    }
+}
     
     @IBAction func guess(sender: AnyObject) {
         let guessString = guessTextField.text
@@ -76,51 +83,52 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         let rightAnswer = generateAnswear()
         let rightAnswer2 = String(rightAnswer)
-        let guess = guessString
-        let correctAnswer = rightAnswer2.componentsSeparatedByString(" ")
-        let guessArray = guess?.componentsSeparatedByString(" ")
         
+        let correctAnswer = rightAnswer2.componentsSeparatedByString(" ")
+        let guessArray = guessString!.componentsSeparatedByString(" ")
+        print("correctAnswer\(correctAnswer)")
+        print("guessArray\(guessArray)")
         
         var countA = 0
         var countB = 0
         
-        if guessArray![0] == correctAnswer[0]{
+        if guessArray[0] == correctAnswer[0]{
             countA += 1
         }else{
             for n in correctAnswer{
-                if guessArray![0] == n{
+                if guessArray[0] == n{
                     countB += 1
                 }
             }
         }
         
-        if guessArray![1] == correctAnswer[1]{
+        if guessArray[1] == correctAnswer[1]{
             countA += 1
         }else{
             for n in correctAnswer{
-                if guessArray![1] == n{
-                    countB += 1
-                }
-            }
-        }
-
-        
-        if guessArray![2] == correctAnswer[2]{
-            countA += 1
-        }else{
-            for n in correctAnswer{
-                if guessArray![2] == n{
+                if guessArray[1] == n{
                     countB += 1
                 }
             }
         }
 
         
-        if guessArray![3] == correctAnswer[3]{
+        if guessArray[2] == correctAnswer[2]{
             countA += 1
         }else{
             for n in correctAnswer{
-                if guessArray![3] == n{
+                if guessArray[2] == n{
+                    countB += 1
+                }
+            }
+        }
+
+        
+        if guessArray[3] == correctAnswer[3]{
+            countA += 1
+        }else{
+            for n in correctAnswer{
+                if guessArray[3] == n{
                     countB += 1
                 }
             }
