@@ -8,7 +8,7 @@
 
 import UIKit
 
-class classRandomanswer: UIViewController {
+class ClassRandomanswer: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
