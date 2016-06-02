@@ -50,7 +50,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func setGame() {
         
-        self.answear = randoGenerate.randomgenerateAnswear
+        self.answear = randoGenerate.generateAnswear()
         self.remainingTime = 9
         self.hintArray.removeAll()
         self.answearLabel.text = nil
@@ -127,7 +127,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Hint Cell", forIndexPath: indexPath)
-        let (guess, hint) = hintArray[indexPath.row]
+        let (guess, hint) = hintArray[hintArray.count - 1 - indexPath.row]
         cell.textLabel?.text = "\(guess) => \(hint)"
         return cell
     }
