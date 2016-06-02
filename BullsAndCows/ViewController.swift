@@ -45,12 +45,10 @@ class ViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         setGame()
     }
-
-    let randoGenerate = Randomanswer()
     
     func setGame() {
         
-        self.answear = randoGenerate.generateAnswear()
+        self.answear = Randomanswer.generateAnswear()
         self.remainingTime = 9
         self.hintArray.removeAll()
         self.answearLabel.text = nil

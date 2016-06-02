@@ -11,7 +11,7 @@ import UIKit
 class Randomanswer: NSObject {
 
     
-    func generateAnswear()->String{
+    static func generateAnswear()->String{
         // TODO: 2. generate your answear here
         // You need to generate 4 random and non-repeating digits.
         // Some hints: http://stackoverflow.com/q/24007129/938380
